@@ -37,13 +37,13 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
   
   如果是传统台式电脑键盘，enter键，右shift通常比capslock键，左shift要大些，并不是对称的，笔记本则设计成左右大小对称的比较多。
   
-  左右shift键就是键盘上仅次于空格的第二大键，当我发现我在emacs上并没有充分利用起shift键，shift键使用的频率还不如alt键，ctrl键时，我就想能不能把shift键当ctrl键用。尝试之后发现可行。
+  左右shift键就是键盘上仅次于空格的第二大键，可以用小指、无名指或无名指、中指，随时都是两根手指一起按，无疑比单指按ctrl好太多。
+  
+  当我发现我在emacs上并没有充分利用起shift键，shift键使用的频率还不如alt键，ctrl键时，我就想能不能把shift键当ctrl键用。尝试之后发现可行。
   
   因为emacs不能识别shift键按下，把shift键当快捷键用后导致无法按caps lock键后正常输入大写字母，caps lock键的作用成为了类似vim中的esc键，也成了一种模式切换。
   
-  首先要解决大写字母输入的问题，我用hydra写了一个函数来解决。
-<details>
-   <summary>代码如下：</summary>
+  首先要解决大写字母输入的问题，我用hydra写了一个函数来解决。代码如下：
 ``` elisp
  (defhydra hydra-caps ()"l"
     ("a" (insert-char 65))("b" (insert-char 66))("c" (insert-char 67))
@@ -78,11 +78,12 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
    ("p" (insert-char 80) :exit t)("q" (insert-char 81) :exit t)("r" (insert-char 82) :exit t)
    ("s" (insert-char 83) :exit t)("t" (insert-char 84) :exit t)("u" (insert-char 85) :exit t)
    ("v" (insert-char 86) :exit t) ("w" (insert-char 87) :exit t)("x" (insert-char 88) :exit t)
-   ("y" (insert-char 89) :exit t)("z" (insert-char 90) :exit t)("," (insert-char 44) :exit t)
-   ("，" (insert-char 65292) :exit t)("<SPC>" counsel-switch-buffer "" :exit t);;切换buffer
-   ("." counsel-imenu "" :exit t)("。" counsel-imenu "" :exit t)(";" nil)("；" nil))
-   (global-set-key (kbd ",") 'hydra-shift/body)
-   (global-set-key (kbd "，") 'hydra-shift/body)
+   ("y" (insert-char 89) :exit t)("z" (insert-char 90) :exit t)
+   ("," (insert-char 44) :exit t)("，" (insert-char 65292) :exit t)
+   ("<SPC>" counsel-switch-buffer "" :exit t);;切换buffer
+   ("." counsel-imenu "" :exit t)("。" counsel-imenu "" :exit t)(";" nil)("；" nil) )
+(global-set-key (kbd ",") 'hydra-shift/body)
+(global-set-key (kbd "，") 'hydra-shift/body)
 ```
 
 上面代码中可以看到我绑定了“，”号进入单个大写字母输入状态，而输入原本的“，”号则需要按两次“，”键才能正常输入“，”号，而因为我在中文输入法下使用emacs比较多，我把中文的"，。；"符号都做了绑定，还加了些其它功能。
@@ -110,15 +111,13 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
 举例：我发现最新版org-mode输入 <s后按tab不会展开了，在我针对org-mode的hydra键绑定里面加了两行elisp，然后在绑定快捷键解决。
 ```elisp
 (defhydra hydra-org-mode () "org" 
-  ;;……
-  ("c" (progn (insert "#+BEGIN_SRC \n\n#+END_SRC")
-          (move-end-of-line -1)) "org代码片段模版" :exit t)
-)
+   ;;……
+   ("c" (progn (insert "#+BEGIN_SRC \n\n#+END_SRC")
+          (move-end-of-line -1)) "org代码片段模版" :exit t) )
 (global-set-key (kbd "C") '());;清除C的默认绑定
 (add-hook 'org-mode-hook (lambda ()
-  ;;……
-  (local-set-key (kbd "C") 'hydra-org-mode/body)
-))
+   ;;……
+   (local-set-key (kbd "C") 'hydra-org-mode/body) ) )
 ```
 
 这里我绑定的快捷键是C_c，当然这个例子中的问题还有更好的解决办法，使用```(use-package org-tempo)```，<q <e 之类的也可以一并解决。这里感谢[@deerainw](https://emacs-china.org/u/deerainw)
