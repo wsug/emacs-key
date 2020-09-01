@@ -72,18 +72,23 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
 
 ``` elisp
 (defhydra hydra-shift () ","
-   ("a" (insert-char 65) :exit t)("b" (insert-char 66) :exit t)("c" (insert-char 67) :exit t)
-   ("d" (insert-char 68) :exit t)("e" (insert-char 69) :exit t)("f" (insert-char 70) :exit t)
-   ("g" (insert-char 71) :exit t)("h" (insert-char 72) :exit t)("i" (insert-char 73) :exit t)
-   ("j" (insert-char 74) :exit t)("k" (insert-char 75) :exit t)("l" (insert-char 76) :exit t)
-   ("m" (insert-char 77) :exit t)("n" (insert-char 78) :exit t)("o" (insert-char 79) :exit t)
-   ("p" (insert-char 80) :exit t)("q" (insert-char 81) :exit t)("r" (insert-char 82) :exit t)
-   ("s" (insert-char 83) :exit t)("t" (insert-char 84) :exit t)("u" (insert-char 85) :exit t)
-   ("v" (insert-char 86) :exit t) ("w" (insert-char 87) :exit t)("x" (insert-char 88) :exit t)
+   ("a" (insert-char 65) :exit t)("b" (insert-char 66) :exit t)
+   ("c" (insert-char 67) :exit t)("d" (insert-char 68) :exit t)
+   ("e" (insert-char 69) :exit t)("f" (insert-char 70) :exit t)
+   ("g" (insert-char 71) :exit t)("h" (insert-char 72) :exit t)
+   ("i" (insert-char 73) :exit t)("j" (insert-char 74) :exit t)
+   ("k" (insert-char 75) :exit t)("l" (insert-char 76) :exit t)
+   ("m" (insert-char 77) :exit t)("n" (insert-char 78) :exit t)
+   ("o" (insert-char 79) :exit t)("p" (insert-char 80) :exit t)
+   ("q" (insert-char 81) :exit t)("r" (insert-char 82) :exit t)
+   ("s" (insert-char 83) :exit t)("t" (insert-char 84) :exit t)
+   ("u" (insert-char 85) :exit t)("v" (insert-char 86) :exit t) 
+   ("w" (insert-char 87) :exit t)("x" (insert-char 88) :exit t)
    ("y" (insert-char 89) :exit t)("z" (insert-char 90) :exit t)
    ("," (insert-char 44) :exit t)("，" (insert-char 65292) :exit t)
    ("<SPC>" counsel-switch-buffer "" :exit t);;切换buffer
-   ("." counsel-imenu "" :exit t)("。" counsel-imenu "" :exit t)(";" nil)("；" nil) )
+   ("." counsel-imenu "" :exit t)("。" counsel-imenu "" :exit t)
+   (";" nil)("；" nil) )
 (global-set-key (kbd ",") 'hydra-shift/body)
 (global-set-key (kbd "，") 'hydra-shift/body)
 ```
@@ -94,7 +99,7 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
 
 比如常见的光标移动：
 ``` elisp
-(global-set-key (kbd "P") 'previous-line)；与ctrl+p一致
+(global-set-key (kbd "P") 'previous-line);与ctrl+p一致
 (global-set-key (kbd "N") 'next-line);下移动光标
 (global-set-key (kbd "F") 'forward-char);向前移动一个字符
 (global-set-key (kbd "B") 'backward-char);向后移动一个字符
@@ -127,7 +132,9 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
 ## 最后补充
 
    这个修改只是在emacs层面改动有效，对键盘本身的按键映射没有影响，不会改了后电脑里其它的软件按键也跟着变，影响不到电脑里其它任何软件的正常使用。
+   
    
    在vscode中也可以识别shift键，也可以用这个按键方法，而且不影响capslock键之后输入大写字母，vsc也有个叫hydra的插件，但完全不是emacs的hydra。
+   
    
    emacs中有很多好玩的功能，需要在使用过程中才能发现。被称之为“神之编辑器”并不是浪得虚名。
