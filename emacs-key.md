@@ -41,8 +41,9 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
   
   因为emacs不能识别shift键按下，把shift键当快捷键用后导致无法按caps lock键后正常输入大写字母，caps lock键的作用成为了类似vim中的esc键，也成了一种模式切换。
   
-  首先要解决大写字母输入的问题，我用hydra写了一个函数来解决。hydra代码如下：
-
+  首先要解决大写字母输入的问题，我用hydra写了一个函数来解决。
+<details>
+   <summary>代码如下：</summary>
 ``` elisp
  (defhydra hydra-caps ()"l"
     ("a" (insert-char 65))("b" (insert-char 66))("c" (insert-char 67))
@@ -57,6 +58,7 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
     ("<SPC>" nil))
     (global-set-key (kbd "L") 'hydra-caps/body)
 ```
+</details>
 
 上面代码中看到我将其绑定到了shift+l键，L进入大写字母输入模式，空格退出大写字母输入模式，当然也可以按其它键退出大写字母输入状态。
 
