@@ -115,7 +115,7 @@ emacs用多了小拇指疼，关节疼，得腱鞘炎等一直是emacs被吐糟�
 ))
 ```
 
-这里我绑定的快捷键是C_c，当然这个例子中的问题还有更好的解决办法，```(use-package org-tempo)```，<q <e 之类的也可以一并解决。这里感谢[@deerainw](https://emacs-china.org/u/deerainw)
+这里我绑定的快捷键是C_c，当然这个例子中的问题还有更好的解决办法，使用```(use-package org-tempo)```，<q <e 之类的也可以一并解决。这里感谢[@deerainw](https://emacs-china.org/u/deerainw)
 ## 最后补充
 
    这个修改只是在emacs层面改动有效，对键盘本身的按键映射没有影响，不会改了后电脑里其它的软件按键也跟着变，影响不到电脑里其它任何软件的正常使用。
